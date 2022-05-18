@@ -2,10 +2,9 @@
   "name": "nodejs-2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "1.js",
   "scripts": {
-    "start": "node index.js \"hello wold\" 1 2 3",
-    "start:dev": "node index.js \"hello wold\" 1 2 3"
+    "start": "node 1.js 4 4"
   },
   "author": "",
   "license": "ISC",
