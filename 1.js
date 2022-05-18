@@ -1,4 +1,3 @@
-console.log(colorer(number));
 const { green, yellow, red } = require("colors/safe"),
 isPrime = (number) => {
     for (let i = 2; i <= number / 2; i++) {
