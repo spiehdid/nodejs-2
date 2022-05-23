@@ -12,10 +12,10 @@ for (i= 0; i < timers.length; i++) {
     const dateStop_i = new Date(timers[i][9]+timers[i][10]+timers[i][11]+timers[i][12]+"-"+timers[i][6]+timers[i][7]+"-"+timers[i][3]+timers[i][4]+"T"+timers[i][0]+timers[i][1]+":00:00");
     eventEmitter.emit("timers", "Timer "+(i+1)+": "+dateStop_i);
     
-    const timer_index = setInterval(function () {
+    const timer_i = setInterval(function () {
         if (isNaN(dateStop_i)){
             // Выключаем интервал
-            clearInterval(timer_index);
+            clearInterval(timer_i);
             // Выводим сообщение об окончание
             eventEmitter.emit("timers", "Timer: Invalid");
         } else {
@@ -28,7 +28,7 @@ for (i= 0; i < timers.length; i++) {
             // Если разница времени меньше или равна нулю 
             if (ms_left <= 0) { // То
                 // Выключаем интервал
-                clearInterval(timer_index);
+                clearInterval(timer_i);
                 // Выводим сообщение об окончание
                 eventEmitter.emit("timers", "Timer: Stop");
             } else { // Иначе
