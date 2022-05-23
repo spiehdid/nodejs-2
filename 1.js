@@ -1,4 +1,3 @@
-console.log(colorer(number));
 const { green, yellow, red } = require("colors/safe"),
 isPrime = (number) => {
     for (let i = 2; i <= number / 2; i++) {
@@ -8,14 +7,14 @@ isPrime = (number) => {
 },
 from = +process.argv[2],
 to = +process.argv[3];
-let count = 1,
+let count = 0,
 arr = [],
 err = 0,
 messages = ["Начало диапазона должно быть положительным числом!", "Конец диапазона должно быть положительным числом!"];
-if (Math.sign(from) == -1 || (isNaN(parseFloat(from)) && !isFinite(from))){
+if (Math.sign(from) == -1 || !isFinite(from)){
     err = 1;
 }
-if(Math.sign(to) == -1 || (isNaN(parseFloat(to)) && !isFinite(to))){
+if(Math.sign(to) == -1 || !isFinite(to)){
     err = err + 2;
 }
 switch(err) {
@@ -27,29 +26,22 @@ switch(err) {
     throw console.log(red(messages[0]),red(messages[1]));
 }
 function getColor(number){
-    let colorer = green;
-    if (isPrime(number)) {
-      if (count % 2 === 0) {
-        colorer = yellow;
-        count ++;
-      } else if (count % 3 === 0) {
-        colorer = red;
-        count = 1;
-      } else {
-        count ++;
-      }
-      arr.push([colorer,number]);
-    }
-    return arr;
+  switch (count % 3) {
+    case 0:
+      return green;
+    case 1:
+      return yellow;
+    case 2:
+      return red;
+  }
 }
 for (let number = from; number <= to; number++) {
-    getColor(number);
+  if (isPrime(number)) {
+    colorer = getColor(number);
+    count ++;
+    console.log(colorer(number));
+  } 
 }
-if (!arr.length == 0){
-    var index;
-    for (index = 0; index < arr.length; ++index) {
-        console.log(arr[index][0](arr[index][1]));
-    }
-} else {
+if(!count){
     throw console.log(red("В последовательности не было простых чисел!"));
 }
